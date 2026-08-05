@@ -1,0 +1,54 @@
+/* ===========================================================================
+   SPACING, RULES, RADII & SHADOWS — Academic CV Design System
+   ---------------------------------------------------------------------------
+   The document aesthetic is print-first: generous margins, hairline rules,
+   square corners, almost no shadow. Spacing follows the same phi rhythm as
+   the type (0.236 / 0.382 / 0.618 / 1 / 1.618 …).
+   =========================================================================== */
+
+:root {
+  /* ---- Golden-ratio spacing ---- */
+  --space-1: 0.236rem;
+  --space-2: 0.382rem;
+  --space-3: 0.618rem;
+  --space-4: 1rem;
+  --space-5: 1.618rem;
+  --space-6: 2.618rem;
+  --space-7: 4.236rem;
+  --space-8: 6.854rem;
+
+  /* ---- Semantic spacing ---- */
+  --gap-item: var(--space-2);      /* between bullet items */
+  --gap-entry: var(--space-3);     /* between CV entries */
+  --gap-block: var(--space-5);     /* between sub-blocks */
+  --gap-section: var(--space-6);   /* between major sections */
+  --page-margin: var(--space-7);   /* document side margins */
+  --page-max: 50rem;               /* ~ A4 text measure */
+
+  /* ---- Rules (the racing-green titlerule is the signature device) ---- */
+  --rule-weight: 1.5px;
+  --rule-weight-hair: 1px;
+  --rule-color: var(--racing-700);
+  --rule-color-faint: var(--rule-warm);
+
+  /* ---- Radii — square by default; tiny softening only for web UI ---- */
+  --radius-none: 0;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-pill: 999px;
+
+  /* ---- Borders ---- */
+  --border-thin: 1px solid var(--border-rule);
+  --border-accent: 2px solid var(--racing-700);
+
+  /* ---- Shadows — paper-on-desk, never glossy ---- */
+  --shadow-none: none;
+  --shadow-page: 0 1px 2px rgba(27, 26, 23, 0.06), 0 8px 28px rgba(27, 26, 23, 0.09);
+  --shadow-card: 0 1px 2px rgba(27, 26, 23, 0.05);
+  --shadow-raised: 0 2px 6px rgba(27, 26, 23, 0.08);
+
+  /* ---- Motion ---- */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1); /* @kind other */
+  --dur-fast: 120ms; /* @kind other */
+  --dur-base: 200ms; /* @kind other */
+}

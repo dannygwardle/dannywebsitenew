@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="CV Document" description="Academic CV viewer — racing-green toolbar, contents rail, typeset paper; full education / presentations / service content" -->
+<helmet>
+<script src="./ds-base.js"></script>
+<style>
+  html, body { margin: 0; height: 100%; }
+  body { background: var(--paper-warm-2); }
+  *, *::before, *::after { box-sizing: border-box; }
+  ::-webkit-scrollbar { width: 12px; height: 12px; }
+  ::-webkit-scrollbar-thumb { background: #cdc8ba; border: 3px solid var(--paper-warm-2); border-radius: 999px; }
+</style>
+</helmet>
+
+<div style="height:100vh; display:flex; flex-direction:column;">
+
+  <!-- ============ TOOLBAR ============ -->
+  <header style="flex:none; display:flex; align-items:center; gap:var(--space-4); padding:0 var(--space-5); height:58px; background:var(--racing-700); color:var(--text-on-accent); border-bottom:1px solid var(--racing-900);">
+    <span style="font-family:var(--font-sans); font-weight:700; letter-spacing:0.04em; font-size:var(--fs-small);">DANNY WARDLE</span>
+    <span style="font-family:var(--font-serif); font-style:italic; color:var(--racing-200); font-size:var(--fs-small);">Curriculum Vitae</span>
+    <div style="flex:1;"></div>
+    <div style="display:flex; align-items:center; gap:2px; margin-right:var(--space-3);">
+      <button ref="{{ comfortableRef }}" onClick="{{ setComfortable }}" style="font-family:var(--font-sans); font-size:var(--fs-tiny); font-weight:600; padding:0.35em 0.7em; cursor:pointer; border-radius:var(--radius-sm); border:1px solid var(--racing-200); background:rgba(255,255,255,0.14); color:#fff;">Comfortable</button>
+      <button ref="{{ compactRef }}" onClick="{{ setCompact }}" style="font-family:var(--font-sans); font-size:var(--fs-tiny); font-weight:600; padding:0.35em 0.7em; cursor:pointer; border-radius:var(--radius-sm); border:1px solid transparent; background:transparent; color:var(--racing-200);">Compact</button>
+    </div>
+    <button onClick="{{ print }}" style="font-family:var(--font-sans); font-size:var(--fs-small); font-weight:600; padding:0.45em 0.9em; cursor:pointer; border-radius:var(--radius-sm); border:1px solid var(--racing-300); background:transparent; color:var(--racing-050);">Print</button>
+    <a href="./Danny_Wardle_CV.pdf" download style="text-decoration:none;"><button style="font-family:var(--font-sans); font-size:var(--fs-small); font-weight:600; padding:0.45em 0.9em; cursor:pointer; border-radius:var(--radius-sm); border:1px solid var(--paper); background:var(--paper); color:var(--racing-700);">Download PDF</button></a>
+  </header>
+
+  <!-- ============ SCROLL AREA ============ -->
+  <div ref="{{ scrollRef }}" style="flex:1; overflow:auto;">
+    <div style="display:flex; max-width:980px; margin:0 auto;">
+
+      <!-- CONTENTS RAIL -->
+      <nav style="flex:none; width:210px; padding:var(--space-6) var(--space-4); border-right:1px solid var(--border-rule); position:sticky; top:0; align-self:flex-start;">
+        <div style="font-family:var(--font-sans); font-size:var(--fs-tiny); font-weight:700; letter-spacing:var(--tracking-label); text-transform:uppercase; color:var(--text-muted); margin-bottom:var(--space-3);">Contents</div>
+        <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:2px;">
+          <li><button onClick="{{ goResearch }}" style="width:100%; text-align:left; cursor:pointer; background:transparent; border:none; border-left:2px solid transparent; padding:0.3em 0 0.3em 0.7em; font-family:var(--font-serif); font-size:var(--fs-small); color:var(--text-muted);">Research</button></li>
+          <li><button onClick="{{ goEducation }}" style="width:100%; text-align:left; cursor:pointer; background:transparent; border:none; border-left:2px solid transparent; padding:0.3em 0 0.3em 0.7em; font-family:var(--font-serif); font-size:var(--fs-small); color:var(--text-muted);">Education</button></li>
+          <li><button onClick="{{ goPresentations }}" style="width:100%; text-align:left; cursor:pointer; background:transparent; border:none; border-left:2px solid transparent; padding:0.3em 0 0.3em 0.7em; font-family:var(--font-serif); font-size:var(--fs-small); color:var(--text-muted);">Presentations</button></li>
+          <li><button onClick="{{ goGrants }}" style="width:100%; text-align:left; cursor:pointer; background:transparent; border:none; border-left:2px solid transparent; padding:0.3em 0 0.3em 0.7em; font-family:var(--font-serif); font-size:var(--fs-small); color:var(--text-muted);">Grants and Scholarships</button></li>
+          <li><button onClick="{{ goTeaching }}" style="width:100%; text-align:left; cursor:pointer; background:transparent; border:none; border-left:2px solid transparent; padding:0.3em 0 0.3em 0.7em; font-family:var(--font-serif); font-size:var(--fs-small); color:var(--text-muted);">Teaching</button></li>
+          <li><button onClick="{{ goService }}" style="width:100%; text-align:left; cursor:pointer; background:transparent; border:none; border-left:2px solid transparent; padding:0.3em 0 0.3em 0.7em; font-family:var(--font-serif); font-size:var(--fs-small); color:var(--text-muted);">Service</button></li>
+          <li><button onClick="{{ goMemberships }}" style="width:100%; text-align:left; cursor:pointer; background:transparent; border:none; border-left:2px solid transparent; padding:0.3em 0 0.3em 0.7em; font-family:var(--font-serif); font-size:var(--fs-small); color:var(--text-muted);">Professional Memberships</button></li>
+        </ul>
+      </nav>
+
+      <!-- PAPER -->
+      <div style="flex:1; padding:var(--space-6) 0 var(--space-8);">
+        <article ref="{{ paperRef }}" style="background:var(--paper); box-shadow:var(--shadow-page); padding:var(--space-7) calc(var(--space-7) * 1.15); font-family:var(--font-serif); font-size:18px; line-height:var(--lh-body); color:var(--text-body);">
+
+          <!-- MASTHEAD -->
+          <header style="text-align:center;">
+            <div style="font-family:var(--font-sans); font-weight:var(--fw-regular); font-size:var(--fs-name); letter-spacing:var(--tracking-name); line-height:var(--lh-tight); color:var(--racing-700);">Danny Wardle</div>
+            <div style="font-family:var(--font-serif); font-size:var(--fs-small); letter-spacing:0.03em; color:var(--text-body); margin-top:var(--space-3);">
+              <a href="mailto:danny.wardle@anu.edu.au" style="color:var(--color-link);">danny.wardle@anu.edu.au</a>
+              <span style="color:var(--text-faint); margin:0 0.6em;">—</span>
+              <span>Australian National University</span>
+              <span style="color:var(--text-faint); margin:0 0.6em;">—</span>
+              <a href="http://dannywardle.org" style="color:var(--color-link);">dannywardle.org</a>
+            </div>
+          </header>
+
+          <!-- RESEARCH -->
+          <div data-anchor="Research" style="margin-top:var(--gap-section); margin-bottom:var(--gap-entry);">
+            <h2 style="font-family:var(--font-serif); font-weight:var(--fw-bold); font-size:var(--fs-h2); line-height:var(--lh-tight); color:var(--racing-700); margin:0;">Research</h2>
+            <div style="height:var(--rule-weight); background:var(--racing-700); margin-top:4px;"></div>
+          </div>
+          <p style="margin:var(--space-3) 0 0;"><strong>Areas of Specialisation</strong></p>
+          <p style="margin:var(--space-1) 0 0;">Metaphysics, Philosophy of Language, Social Ontology</p>
+          <p style="margin:var(--space-4) 0 0;"><strong>Areas of Competence</strong></p>
+          <p style="margin:var(--space-1) 0 0;">Philosophy of Physics</p>
+
+          <!-- EDUCATION -->
+          <div data-anchor="Education" style="margin-top:var(--gap-section); margin-bottom:var(--gap-entry);">
+            <h2 style="font-family:var(--font-serif); font-weight:var(--fw-bold); font-size:var(--fs-h2); line-height:var(--lh-tight); color:var(--racing-700); margin:0;">Education</h2>
+            <div style="height:var(--rule-weight); background:var(--racing-700); margin-top:4px;"></div>
+          </div>
+          <div style="margin-top:var(--gap-entry);">
+            <div style="display:flex; justify-content:space-between; align-items:baseline; gap:var(--space-4);"><span style="font-weight:var(--fw-bold); color:var(--text-ink);">Doctor of Philosophy</span><span style="font-weight:var(--fw-bold); color:var(--text-ink); white-space:nowrap;">2024 –</span></div>
+            <div style="color:var(--text-body);"><span>Australian National University</span></div>
+          </div>
+          <ul style="list-style:none; margin:var(--space-2) 0 0; padding:0; display:flex; flex-direction:column; gap:var(--gap-item);">
+            <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">Supervisor: Nicholas Southwood</span></li>
+          </ul>
+          <div style="margin-top:var(--gap-entry);">
+            <div style="display:flex; justify-content:space-between; align-items:baseline; gap:var(--space-4);"><span style="font-weight:var(--fw-bold); color:var(--text-ink);">Doctor of Philosophy (Withdrawn)</span><span style="font-weight:var(--fw-bold); color:var(--text-ink); white-space:nowrap;">2021 – 2024</span></div>
+            <div style="color:var(--text-body);"><span>Australian Catholic University (Dianoia Institute of Philosophy)</span></div>
+          </div>
+          <ul style="list-style:none; margin:var(--space-2) 0 0; padding:0; display:flex; flex-direction:column; gap:var(--gap-item);">
+            <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">Withdrew from the program after the disestablishment of the Dianoia Institute</span></li>
+            <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">Supervisors: John Hawthorne and Sam Baron</span></li>
+          </ul>
+          <div style="margin-top:var(--gap-entry);">
+            <div style="display:flex; justify-content:space-between; align-items:baseline; gap:var(--space-4);"><span style="font-weight:var(--fw-bold); color:var(--text-ink);">Master of Philosophy</span><span style="font-weight:var(--fw-bold); color:var(--text-ink); white-space:nowrap;">2019 – 2021</span></div>
+            <div style="color:var(--text-body);"><span>University of Adelaide</span></div>
+          </div>
+          <ul style="list-style:none; margin:var(--space-2) 0 0; padding:0; display:flex; flex-direction:column; gap:var(--gap-item);">
+            <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;"><em>Thesis: Opening a Can of Spacetime Worms: The Metaphysics of Persistence</em></span></li>
+            <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">Awarded without revisions in May 2021</span></li>
+            <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">Supervisors: Antony Eagle and Jordi Fernández</span></li>
+          </ul>
+          <div style="margin-top:var(--gap-entry);">
+            <div style="display:flex; justify-content:space-between; align-items:baseline; gap:var(--space-4);"><span style="font-weight:var(--fw-bold); color:var(--text-ink);">Bachelor of Arts (Advanced)</span><span style="font-weight:var(--fw-bold); color:var(--text-ink); white-space:nowrap;">2016 – 2018</span></div>
+            <div style="color:var(--text-body);"><span>University of Adelaide</span></div>
+          </div>
+          <ul style="list-style:none; margin:var(--space-2) 0 0; padding:0; display:flex; flex-direction:column; gap:var(--gap-item);">
+            <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">Majors: Philosophy and Politics/International Relations</span></li>
+          </ul>
+
+          <!-- PRESENTATIONS -->
+          <div data-anchor="Presentations" style="margin-top:var(--gap-section); margin-bottom:var(--gap-entry);">
+            <h2 style="font-family:var(--font-serif); font-weight:var(--fw-bold); font-size:var(--fs-h2); line-height:var(--lh-tight); color:var(--racing-700); margin:0;">Presentations</h2>
+            <div style="height:var(--rule-weight); background:var(--racing-700); margin-top:4px;"></div>
+          </div>
+          <div style="font-family:var(--font-sans); font-size:var(--fs-tiny); font-weight:var(--fw-bold); letter-spacing:var(--tracking-label); text-transform:uppercase; color:var(--text-muted); margin-top:var(--space-4); margin-bottom:var(--space-1);">Invited Talks</div>
+          <div style="margin-top:var(--gap-entry);">
+            <div style="color:var(--text-ink);">&lsquo;Location and Mereology in Quantum Theory&rsquo;</div>
+            <ul style="list-style:none; margin:var(--space-2) 0 0; padding:0; display:flex; flex-direction:column; gap:var(--gap-item);">
+              <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">Time and Emergence, University of Western Australia, December 2019.</span></li>
+            </ul>
+          </div>
+          <div style="font-family:var(--font-sans); font-size:var(--fs-tiny); font-weight:var(--fw-bold); letter-spacing:var(--tracking-label); text-transform:uppercase; color:var(--text-muted); margin-top:var(--space-4); margin-bottom:var(--space-1);">Conference Presentations</div>
+          <div style="margin-top:var(--gap-entry);">
+            <div style="color:var(--text-ink);">&lsquo;Making Sense of Temporary Memberlessness&rsquo;</div>
+            <ul style="list-style:none; margin:var(--space-2) 0 0; padding:0; display:flex; flex-direction:column; gap:var(--gap-item);">
+              <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">Social Ontology, Trinity College Dublin, August 2025.</span></li>
+              <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">Australasian Association of Philosophy (AAP) Conference, University of Queensland, July 2025.</span></li>
+            </ul>
+          </div>
+          <div style="margin-top:var(--gap-entry);">
+            <div style="color:var(--text-ink);">&lsquo;Locating Groups&rsquo;</div>
+            <ul style="list-style:none; margin:var(--space-2) 0 0; padding:0; display:flex; flex-direction:column; gap:var(--gap-item);">
+              <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">Social Ontology, Duke University, July 2024.</span></li>
+              <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">Australasian Postgraduate Philosophy Conference (APPC), University of Western Australia, December 2023.</span></li>
+              <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">Space, Time, and Location, University of Adelaide, July 2023.</span></li>
+            </ul>
+          </div>
+          <div style="margin-top:var(--gap-entry);">
+            <div style="color:var(--text-ink);">&lsquo;Social Plenitude&rsquo;</div>
+            <ul style="list-style:none; margin:var(--space-2) 0 0; padding:0; display:flex; flex-direction:column; gap:var(--gap-item);">
+              <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">SANU, Macquarie University, November 2024.</span></li>
+              <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">Social Ontology &amp; Collective Intentionality, University of Vienna, August 2022.</span></li>
+              <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">Australasian Association of Philosophy (AAP) Conference, University of Waikato, July 2022.</span></li>
+            </ul>
+          </div>
+
+          <div style="margin-top:var(--gap-entry);">
+            <div style="color:var(--text-ink);">&lsquo;Social Essences and Personal Identity&rsquo;</div>
+            <ul style="list-style:none; margin:var(--space-2) 0 0; padding:0; display:flex; flex-direction:column; gap:var(--gap-item);">
+              <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">Australasian Association of Philosophy (AAP) Conference, University of Western Australia, July 2024.</span></li>
+            </ul>
+          </div>
+          <div style="margin-top:var(--gap-entry);">
+            <div style="color:var(--text-ink);">&lsquo;What&rsquo;s so &lsquo;Universal&rsquo; About Universal Welfare, Anyway?&rsquo;</div>
+            <ul style="list-style:none; margin:var(--space-2) 0 0; padding:0; display:flex; flex-direction:column; gap:var(--gap-item);">
+              <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">Australasian Association of Philosophy (AAP) Conference, Australian Catholic University, July 2023.</span></li>
+            </ul>
+          </div>
+          <div style="margin-top:var(--gap-entry);">
+            <div style="color:var(--text-ink);">&lsquo;Making Sense of Memberless Groups&rsquo;</div>
+            <ul style="list-style:none; margin:var(--space-2) 0 0; padding:0; display:flex; flex-direction:column; gap:var(--gap-item);">
+              <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">Australasian Postgraduate Philosophy Conference (APPC), University of Sydney, November 2022.</span></li>
+            </ul>
+          </div>
+          <div style="margin-top:var(--gap-entry);">
+            <div style="color:var(--text-ink);">&lsquo;Don&rsquo;t count your stages!&rsquo;</div>
+            <ul style="list-style:none; margin:var(--space-2) 0 0; padding:0; display:flex; flex-direction:column; gap:var(--gap-item);">
+              <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">Australasian Postgraduate Philosophy Conference (APPC), University of Wollongong, November 2021.</span></li>
+            </ul>
+          </div>
+          <div style="margin-top:var(--gap-entry);">
+            <div style="color:var(--text-ink);">&lsquo;How (Quantum) Things Persist&rsquo;</div>
+            <ul style="list-style:none; margin:var(--space-2) 0 0; padding:0; display:flex; flex-direction:column; gap:var(--gap-item);">
+              <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">Australasian Association of Philosophy (AAP) Conference, University of Waikato, July 2021.</span></li>
+              <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">Victorian Postgraduate Philosophy Workshop, University of Melbourne, November 2020.</span></li>
+            </ul>
+          </div>
+          <div style="margin-top:var(--gap-entry);">
+            <div style="color:var(--text-ink);">&lsquo;Counting for Worm Theorists&rsquo;</div>
+            <ul style="list-style:none; margin:var(--space-2) 0 0; padding:0; display:flex; flex-direction:column; gap:var(--gap-item);">
+              <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">11th Meeting of the International Association for Philosophy of Time (IAPT), Yamaguchi University, July 2026.</span></li>
+              <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">New Zealand Association of Philosophers (NZAP) Conference, University of Auckland, December 2019.</span></li>
+              <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">Australasian Postgraduate Philosophy Conference (APPC), Victoria University of Wellington, December 2019.</span></li>
+              <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">Time and Other Matters, University of Adelaide, July 2019.</span></li>
+            </ul>
+          </div>
+          <div data-anchor="Grants and Scholarships" style="margin-top:var(--gap-section); margin-bottom:var(--gap-entry);">
+            <h2 style="font-family:var(--font-serif); font-weight:var(--fw-bold); font-size:var(--fs-h2); line-height:var(--lh-tight); color:var(--racing-700); margin:0;">Grants and Scholarships</h2>
+            <div style="height:var(--rule-weight); background:var(--racing-700); margin-top:4px;"></div>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:var(--space-4); margin-top:var(--space-3);"><span style="color:var(--text-body);">RTP Stipend Scholarship (ANU), Australian Government</span><span style="font-weight:var(--fw-bold); color:var(--text-ink); white-space:nowrap;">2024 – 2028</span></div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:var(--space-4); margin-top:var(--space-3);"><span style="color:var(--text-body);">RTP Stipend Scholarship (ACU), Australian Government</span><span style="font-weight:var(--fw-bold); color:var(--text-ink); white-space:nowrap;">2021 – 2024</span></div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:var(--space-4); margin-top:var(--space-3);"><span style="color:var(--text-body);">MPhil (No Honours) Scholarship, University of Adelaide</span><span style="font-weight:var(--fw-bold); color:var(--text-ink); white-space:nowrap;">2019 – 2021</span></div>
+
+          <!-- TEACHING -->
+          <div data-anchor="Teaching" style="margin-top:var(--gap-section); margin-bottom:var(--gap-entry);">
+            <h2 style="font-family:var(--font-serif); font-weight:var(--fw-bold); font-size:var(--fs-h2); line-height:var(--lh-tight); color:var(--racing-700); margin:0;">Teaching</h2>
+            <div style="height:var(--rule-weight); background:var(--racing-700); margin-top:4px;"></div>
+          </div>
+          <div style="font-family:var(--font-sans); font-size:var(--fs-tiny); font-weight:var(--fw-bold); letter-spacing:var(--tracking-label); text-transform:uppercase; color:var(--text-muted); margin-top:var(--space-4); margin-bottom:var(--space-1);">At the Australian National University</div>
+          <div style="font-style:italic; color:var(--text-ink); margin-top:var(--space-3);">Tutor</div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:var(--space-4); margin-top:var(--space-3);"><span style="color:var(--text-body);">Topics in Analytic Philosophy: Philosophy of Language</span><span style="font-weight:var(--fw-bold); color:var(--text-ink); white-space:nowrap;">2026</span></div>
+          <div style="font-family:var(--font-sans); font-size:var(--fs-tiny); font-weight:var(--fw-bold); letter-spacing:var(--tracking-label); text-transform:uppercase; color:var(--text-muted); margin-top:var(--space-4); margin-bottom:var(--space-1);">At the Australian Catholic University</div>
+          <div style="font-style:italic; color:var(--text-ink); margin-top:var(--space-3);">Guest Lecture</div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:var(--space-4); margin-top:var(--space-3);"><span style="color:var(--text-body);">&lsquo;Personal Identity and the Self&rsquo;, Philosophy: The Big Questions</span><span style="font-weight:var(--fw-bold); color:var(--text-ink); white-space:nowrap;">2022</span></div>
+          <div style="font-style:italic; color:var(--text-ink); margin-top:var(--space-3);">Tutor</div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:var(--space-4); margin-top:var(--space-3);"><span style="color:var(--text-body);">Introduction to Ethics</span><span style="font-weight:var(--fw-bold); color:var(--text-ink); white-space:nowrap;">2022</span></div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:var(--space-4); margin-top:var(--space-3);"><span style="color:var(--text-body);">Philosophy: The Big Questions</span><span style="font-weight:var(--fw-bold); color:var(--text-ink); white-space:nowrap;">2022</span></div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:var(--space-4); margin-top:var(--space-3);"><span style="color:var(--text-body);">Theories of Human Nature</span><span style="font-weight:var(--fw-bold); color:var(--text-ink); white-space:nowrap;">2021 &amp; 2023</span></div>
+          <div style="font-family:var(--font-sans); font-size:var(--fs-tiny); font-weight:var(--fw-bold); letter-spacing:var(--tracking-label); text-transform:uppercase; color:var(--text-muted); margin-top:var(--space-4); margin-bottom:var(--space-1);">At the University of Adelaide</div>
+          <div style="font-style:italic; color:var(--text-ink); margin-top:var(--space-3);">Tutor</div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:var(--space-4); margin-top:var(--space-3);"><span style="color:var(--text-body);">Mind and World</span><span style="font-weight:var(--fw-bold); color:var(--text-ink); white-space:nowrap;">2021</span></div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:var(--space-4); margin-top:var(--space-3);"><span style="color:var(--text-body);">Introduction to Logic</span><span style="font-weight:var(--fw-bold); color:var(--text-ink); white-space:nowrap;">2020</span></div>
+          <div style="font-family:var(--font-sans); font-size:var(--fs-tiny); font-weight:var(--fw-bold); letter-spacing:var(--tracking-label); text-transform:uppercase; color:var(--text-muted); margin-top:var(--space-4); margin-bottom:var(--space-1);">Grader</div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:var(--space-4); margin-top:var(--space-3);"><span style="color:var(--text-body);">God, Faith and Infinity</span><span style="font-weight:var(--fw-bold); color:var(--text-ink); white-space:nowrap;">2020</span></div>
+
+          <!-- SERVICE -->
+          <div data-anchor="Service" style="margin-top:var(--gap-section); margin-bottom:var(--gap-entry);">
+            <h2 style="font-family:var(--font-serif); font-weight:var(--fw-bold); font-size:var(--fs-h2); line-height:var(--lh-tight); color:var(--racing-700); margin:0;">Service</h2>
+            <div style="height:var(--rule-weight); background:var(--racing-700); margin-top:4px;"></div>
+          </div>
+          <div style="font-family:var(--font-sans); font-size:var(--fs-tiny); font-weight:var(--fw-bold); letter-spacing:var(--tracking-label); text-transform:uppercase; color:var(--text-muted); margin-top:var(--space-4); margin-bottom:var(--space-1);">Committees</div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:var(--space-4); margin-top:var(--space-3);"><span style="color:var(--text-body);">Convenor, AAP Postgraduate Committee</span><span style="font-weight:var(--fw-bold); color:var(--text-ink); white-space:nowrap;">2020 &amp; 2025</span></div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:var(--space-4); margin-top:var(--space-3);"><span style="color:var(--text-body);">Member, AAP Postgraduate Committee</span><span style="font-weight:var(--fw-bold); color:var(--text-ink); white-space:nowrap;">2020 – 2026</span></div>
+          <div style="font-family:var(--font-sans); font-size:var(--fs-tiny); font-weight:var(--fw-bold); letter-spacing:var(--tracking-label); text-transform:uppercase; color:var(--text-muted); margin-top:var(--space-4); margin-bottom:var(--space-1);">Reviewing</div>
+          <p style="margin:var(--space-3) 0 0;">Synthese, Philosophia, Undergraduate Philosophy Journal of Australasia</p>
+          <div style="font-family:var(--font-sans); font-size:var(--fs-tiny); font-weight:var(--fw-bold); letter-spacing:var(--tracking-label); text-transform:uppercase; color:var(--text-muted); margin-top:var(--space-4); margin-bottom:var(--space-1);">Conference Organising</div>
+          <div style="margin-top:var(--gap-entry);">
+            <div style="color:var(--text-ink);">Organiser, Australasian Postgraduate Philosophy Conference</div>
+            <ul style="list-style:none; margin:var(--space-2) 0 0; padding:0; display:flex; flex-direction:column; gap:var(--gap-item);">
+              <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">Online, November 2024.</span></li>
+              <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">University of Sydney (Online), November 2022.</span></li>
+              <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">University of Wollongong (Online), November 2021.</span></li>
+              <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">University of Adelaide (Online), September 2020.</span></li>
+            </ul>
+          </div>
+          <div style="font-family:var(--font-sans); font-size:var(--fs-tiny); font-weight:var(--fw-bold); letter-spacing:var(--tracking-label); text-transform:uppercase; color:var(--text-muted); margin-top:var(--space-4); margin-bottom:var(--space-1);">Popular Writing and Media</div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:var(--space-4); margin-top:var(--space-3);"><span style="color:var(--text-body);">Writer, Plurality of Words</span><span style="font-weight:var(--fw-bold); color:var(--text-ink); white-space:nowrap;">2023 –</span></div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:var(--space-4); margin-top:var(--space-3);"><span style="color:var(--text-body);">Editor and Web Developer, Sagacity Magazine</span><span style="font-weight:var(--fw-bold); color:var(--text-ink); white-space:nowrap;">2022 –</span></div>
+          <div style="font-family:var(--font-sans); font-size:var(--fs-tiny); font-weight:var(--fw-bold); letter-spacing:var(--tracking-label); text-transform:uppercase; color:var(--text-muted); margin-top:var(--space-4); margin-bottom:var(--space-1);">Podcast Appearances</div>
+          <div style="margin-top:var(--gap-entry);">
+            <div style="color:var(--text-ink);">&lsquo;Bonus Episode! What&rsquo;s the Most Underrated Part of Doing a PhD?&rsquo;</div>
+            <ul style="list-style:none; margin:var(--space-2) 0 0; padding:0; display:flex; flex-direction:column; gap:var(--gap-item);">
+              <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">Philosopher&rsquo;s Nest, May 2024.</span></li>
+            </ul>
+          </div>
+          <div style="margin-top:var(--gap-entry);">
+            <div style="color:var(--text-ink);">&lsquo;Danny Wardle on the Proposed Redundancies at ACU, Social Ontology, and Research Masters&rsquo;</div>
+            <ul style="list-style:none; margin:var(--space-2) 0 0; padding:0; display:flex; flex-direction:column; gap:var(--gap-item);">
+              <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">Philosopher&rsquo;s Nest, October 2023.</span></li>
+            </ul>
+          </div>
+          <div style="font-family:var(--font-sans); font-size:var(--fs-tiny); font-weight:var(--fw-bold); letter-spacing:var(--tracking-label); text-transform:uppercase; color:var(--text-muted); margin-top:var(--space-4); margin-bottom:var(--space-1);">Public Talks</div>
+          <div style="margin-top:var(--gap-entry);">
+            <div style="color:var(--text-ink);">&lsquo;On the Persistence of Social Groups&rsquo;</div>
+            <ul style="list-style:none; margin:var(--space-2) 0 0; padding:0; display:flex; flex-direction:column; gap:var(--gap-item);">
+              <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">University of the Third Age (U3A) Philosophy Group, September 2020.</span></li>
+            </ul>
+          </div>
+          <div style="margin-top:var(--gap-entry);">
+            <div style="color:var(--text-ink);">&lsquo;Persistence and Paradoxes of Coincidence&rsquo;</div>
+            <ul style="list-style:none; margin:var(--space-2) 0 0; padding:0; display:flex; flex-direction:column; gap:var(--gap-item);">
+              <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:var(--fw-bold);">–</span><span style="flex:1;">Philosophy Club, University of Adelaide, August 2020.</span></li>
+            </ul>
+          </div>
+          <div style="font-family:var(--font-sans); font-size:var(--fs-tiny); font-weight:var(--fw-bold); letter-spacing:var(--tracking-label); text-transform:uppercase; color:var(--text-muted); margin-top:var(--space-4); margin-bottom:var(--space-1);">Schools</div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:var(--space-4); margin-top:var(--space-3);"><span style="color:var(--text-body);">Judge and Moderator, TKEthics Global Olympiad</span><span style="font-weight:var(--fw-bold); color:var(--text-ink); white-space:nowrap;">2025</span></div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:var(--space-4); margin-top:var(--space-3);"><span style="color:var(--text-body);">Judge and Moderator, Ethics Olympiad</span><span style="font-weight:var(--fw-bold); color:var(--text-ink); white-space:nowrap;">2023 –</span></div>
+          <p style="margin:var(--space-3) 0 0;">Research project interviewee for multiple Year 11 and Year 12 students in South Australia.</p>
+
+          <!-- MEMBERSHIPS -->
+          <div data-anchor="Professional Memberships" style="margin-top:var(--gap-section); margin-bottom:var(--gap-entry);">
+            <h2 style="font-family:var(--font-serif); font-weight:var(--fw-bold); font-size:var(--fs-h2); line-height:var(--lh-tight); color:var(--racing-700); margin:0;">Professional Memberships</h2>
+            <div style="height:var(--rule-weight); background:var(--racing-700); margin-top:4px;"></div>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:var(--space-4); margin-top:var(--space-3);"><span style="color:var(--text-body);">International Social Ontology Society</span><span style="font-weight:var(--fw-bold); color:var(--text-ink); white-space:nowrap;">2022 –</span></div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:var(--space-4); margin-top:var(--space-3);"><span style="color:var(--text-body);">Australasian Association of Philosophy</span><span style="font-weight:var(--fw-bold); color:var(--text-ink); white-space:nowrap;">2019 –</span></div>
+
+        </article>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.scrollRef = React.createRef();
+    this.paperRef = React.createRef();
+    this.comfortableRef = React.createRef();
+    this.compactRef = React.createRef();
+    this.state = { density: 'Comfortable' };
+  }
+
+  componentDidMount() { this.paintDensity(); }
+  componentDidUpdate() { this.paintDensity(); }
+
+  paintDensity() {
+    const compact = this.state.density === 'Compact';
+    const paper = this.paperRef.current;
+    if (paper) {
+      paper.style.padding = compact
+        ? 'var(--space-6) var(--space-7)'
+        : 'var(--space-7) calc(var(--space-7) * 1.15)';
+      paper.style.fontSize = compact ? '16px' : '18px';
+    }
+    const apply = (el, active) => {
+      if (!el) return;
+      el.style.borderColor = active ? 'var(--racing-200)' : 'transparent';
+      el.style.background = active ? 'rgba(255,255,255,0.14)' : 'transparent';
+      el.style.color = active ? '#fff' : 'var(--racing-200)';
+    };
+    apply(this.comfortableRef.current, !compact);
+    apply(this.compactRef.current, compact);
+  }
+
+  go(name) {
+    const area = this.scrollRef.current;
+    if (!area) return;
+    const el = area.querySelector('[data-anchor="' + name + '"]');
+    if (el) area.scrollTo({ top: el.offsetTop - 24, behavior: 'smooth' });
+  }
+
+  renderVals() {
+    return {
+      scrollRef: this.scrollRef,
+      paperRef: this.paperRef,
+      comfortableRef: this.comfortableRef,
+      compactRef: this.compactRef,
+      setComfortable: () => this.setState({ density: 'Comfortable' }),
+      setCompact: () => this.setState({ density: 'Compact' }),
+      print: () => window.print(),
+      goResearch: () => this.go('Research'),
+      goEducation: () => this.go('Education'),
+      goPresentations: () => this.go('Presentations'),
+      goGrants: () => this.go('Grants and Scholarships'),
+      goTeaching: () => this.go('Teaching'),
+      goService: () => this.go('Service'),
+      goMemberships: () => this.go('Professional Memberships'),
+    };
+  }
+}
+</script>
+</body>
+</html>
