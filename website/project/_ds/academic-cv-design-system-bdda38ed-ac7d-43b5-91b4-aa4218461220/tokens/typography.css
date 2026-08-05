@@ -1,0 +1,47 @@
+/* ===========================================================================
+   TYPOGRAPHY — Academic CV Design System
+   ---------------------------------------------------------------------------
+   The CV is set on a golden-ratio scale (phi = 1.618), 12pt base, with a
+   humanist sans for the name + a transitional serif for everything else.
+   We preserve the ratio and the two-typeface pairing for the web.
+   =========================================================================== */
+
+:root {
+  /* ---- Families ---- */
+  --font-serif: 'Crimson Text', 'Minion Pro', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Source Sans 3', 'Myriad Pro', system-ui, -apple-system, sans-serif;
+  --font-body: var(--font-serif);
+  --font-display: var(--font-sans);
+
+  /* ---- Golden-ratio type scale (root 1rem = 18px on the document) ---- */
+  --fs-name: 2.618rem;   /* phi^2  — document name / hero */
+  --fs-display: 1.618rem;/* phi    — page titles */
+  --fs-h2: 1.318rem;     /* CV \sizetwo — section sub-heads */
+  --fs-h3: 1.146rem;
+  --fs-body: 1rem;       /* \sizethree — running text */
+  --fs-small: 0.85rem;   /* \sizefour-ish — meta, dates */
+  --fs-tiny: 0.764rem;   /* footnotes, captions, eyebrow */
+
+  /* ---- Weights ---- */
+  --fw-regular: 400; /* @kind font */
+  --fw-medium: 600; /* @kind font */
+  --fw-bold: 700; /* @kind font */
+
+  /* ---- Line heights ---- */
+  --lh-tight: 1.12;   /* @kind font */
+  --lh-snug: 1.3;     /* @kind font */
+  --lh-body: 1.5;     /* @kind font */
+  --lh-loose: 1.65; /* @kind font */
+
+  /* ---- Tracking ---- */
+  --tracking-name: 0.04em;   /* LetterSpace on the name */
+  --tracking-label: 0.14em;  /* small-caps section eyebrows */
+  --tracking-tight: -0.01em;
+  --tracking-normal: 0;
+
+  /* ---- Semantic roles ---- */
+  --type-name-family: var(--font-sans);
+  --type-name-weight: var(--fw-regular);
+  --type-section-family: var(--font-serif);
+  --type-section-weight: var(--fw-bold);
+}

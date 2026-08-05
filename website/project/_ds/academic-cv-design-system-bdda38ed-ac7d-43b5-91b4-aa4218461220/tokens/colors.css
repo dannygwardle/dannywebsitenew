@@ -1,0 +1,67 @@
+/* ===========================================================================
+   COLORS — Academic CV Design System
+   ---------------------------------------------------------------------------
+   Two heritage hues drive the whole system, lifted verbatim from the LaTeX:
+     racing green  rgb(0,66,37)  = #004225  -> name, section heads, rules
+     link maroon   rgb(66,0,29)  = #42001D  -> hyperlinks, footnote daggers
+   Everything else is warm, paper-toned neutral. No blue, no gradient.
+   =========================================================================== */
+
+:root {
+  /* ---- Racing green (primary) ---- */
+  --racing-900: #002115;
+  --racing-800: #00301c;
+  --racing-700: #004225; /* base — the CV's \definecolor{racing} */
+  --racing-600: #0d5733;
+  --racing-500: #2a7150;
+  --racing-300: #7faa92;
+  --racing-200: #b9d2c6;
+  --racing-100: #e2ece7;
+  --racing-050: #f1f6f3;
+
+  /* ---- Link maroon (secondary) ---- */
+  --maroon-900: #2c0013;
+  --maroon-700: #42001d; /* base — the CV's \definecolor{link} */
+  --maroon-500: #6f1334;
+  --maroon-300: #a86a80;
+  --maroon-100: #ecdde2;
+
+  /* ---- Warm neutrals (paper & ink) ---- */
+  --ink-900: #1b1a17;
+  --ink-700: #34322c;
+  --ink-500: #57544c;
+  --ink-400: #75716757;  /* unused placeholder, kept for parity */
+  --ink-muted: #6f6c64;
+  --ink-faint: #9b978d;
+  --rule-warm: #d8d4c9;
+  --rule-faint: #ebe8df;
+
+  --paper: #ffffff;
+  --paper-warm: #faf8f2;  /* parchment surface for cards */
+  --paper-warm-2: #f3efe4;
+  --paper-ivory: #fdfcf8;
+
+  /* ---- Semantic aliases ---- */
+  --color-accent: var(--racing-700);
+  --color-accent-strong: var(--racing-900);
+  --color-link: var(--maroon-700);
+  --color-link-hover: var(--maroon-500);
+
+  --text-ink: var(--ink-900);
+  --text-body: var(--ink-700);
+  --text-muted: var(--ink-muted);
+  --text-faint: var(--ink-faint);
+  --text-on-accent: #f1f6f3;
+
+  --surface-page: var(--paper);
+  --surface-card: var(--paper-warm);
+  --surface-sunken: var(--paper-warm-2);
+  --surface-accent: var(--racing-700);
+  --surface-accent-soft: var(--racing-050);
+
+  --border-rule: var(--rule-warm);
+  --border-faint: var(--rule-faint);
+  --border-accent: var(--racing-700);
+
+  --focus-ring: var(--racing-500);
+}

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Academic Website" description="Personal academic homepage — nav, bio, research, teaching, CV; racing-green ivory palette from the design system" -->
+<helmet>
+<script src="./ds-base.js"></script>
+<style>
+  html, body { margin: 0; min-height: 100%; }
+  body { background: var(--paper-ivory); }
+  *, *::before, *::after { box-sizing: border-box; }
+</style>
+</helmet>
+
+<div style="min-height:100vh; background:var(--paper-ivory); display:flex; flex-direction:column;">
+
+  <!-- ============ HEADER ============ -->
+  <header style="display:flex; align-items:baseline; gap:var(--space-5); padding:var(--space-5) var(--space-6); border-bottom:1.5px solid var(--racing-700); flex-wrap:wrap;">
+    <button onClick="{{ goHome }}" style="background:none; border:none; cursor:pointer; padding:0; font-family:var(--font-sans); font-weight:400; font-size:var(--fs-display); letter-spacing:0.03em; color:var(--racing-700);">Danny Wardle</button>
+    <span style="font-family:var(--font-serif); font-style:italic; color:var(--text-muted); font-size:var(--fs-small);">Philosopher · Australian National University</span>
+    <div style="flex:1;"></div>
+    <nav style="display:flex; gap:var(--space-4);">
+      <button ref="{{ navHomeRef }}" onClick="{{ goHome }}" style="background:none; border:none; cursor:pointer; padding:0 0 2px; font-family:var(--font-sans); font-size:var(--fs-small); font-weight:700; color:var(--racing-700); border-bottom:2px solid var(--racing-700);">Home</button>
+      <button ref="{{ navTeachingRef }}" onClick="{{ goTeaching }}" style="background:none; border:none; cursor:pointer; padding:0 0 2px; font-family:var(--font-sans); font-size:var(--fs-small); font-weight:400; color:var(--text-muted); border-bottom:2px solid transparent;">Teaching</button>
+      <button ref="{{ navCVRef }}" onClick="{{ goCV }}" style="background:none; border:none; cursor:pointer; padding:0 0 2px; font-family:var(--font-sans); font-size:var(--fs-small); font-weight:400; color:var(--text-muted); border-bottom:2px solid transparent;">CV</button>
+    </nav>
+  </header>
+
+  <!-- ============ MAIN ============ -->
+  <main style="flex:1; max-width:720px; width:100%; margin:0 auto; padding:var(--space-7) var(--space-6);">
+
+    <!-- HOME -->
+    <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+    <div data-screen-label="Home">
+      <div style="display:flex; gap:var(--space-6); align-items:flex-start; flex-wrap:wrap; margin-bottom:var(--space-2);">
+        <img src="assets/portrait.png" alt="Pen sketch of Danny Wardle" style="width:168px; height:168px; object-fit:cover; object-position:top; flex:none; border:1px solid var(--border-rule); border-radius:var(--radius-sm); background:var(--paper);">
+        <div style="flex:1; min-width:300px;">
+          <p style="font-family:var(--font-sans); font-size:var(--fs-name); color:var(--racing-700); letter-spacing:0.02em; margin:0 0 var(--space-2); line-height:1.05;">Danny Wardle</p>
+          <p style="font-family:var(--font-serif); font-style:italic; color:var(--text-muted); font-size:var(--fs-h3); margin:0 0 var(--space-3);">PhD Candidate, Australian National University</p>
+        </div>
+      </div>
+      <p style="font-family:var(--font-serif); font-size:var(--fs-body); line-height:var(--lh-loose); color:var(--text-body); margin:0 0 var(--space-4); max-width:38em;">I am a PhD candidate in philosophy at the <strong>Australian National University</strong>, supervised by Nicholas Southwood. The aim of my research is a series of papers on social metaphysics — investigating questions about how social groups persist through change, where social groups are spatiotemporally located, whether groups can persist without members and so on. From 2021–2024 I studied at the Australian Catholic University's now-disestablished Dianoia Institute of Philosophy, and before that took a Master of Philosophy at the <strong>University of Adelaide</strong> with a thesis on the metaphysics of persistence titled&nbsp;<em>Opening a Can of Spacetime Worms: The Metaphysics of Persistence</em>.</p>
+      <p style="font-family:var(--font-serif); font-size:var(--fs-body); line-height:var(--lh-loose); color:var(--text-body); margin:0 0 var(--space-4); max-width:38em;">I am an Ordinary Member of the Australasian Association of Philosophy (AAP) Postgraduate Committee and I manage the website for <a href="https://sagacitymagazine.com.au" style="color: var(--color-link);">Sagacity</a>, a venue for public philosophy by postgraduate students. I was previously the Convenor of the AAP Postgraduate Committee in 2020 and 2025. I also write on public policy and politics — weekly at my Substack <a href="https://plurality.substack.com" style="color: var(--color-link);">Plurality of Words</a>, and on occasion for outlets like <a href="https://jacobin.com/author/danny-wardle" style="color: var(--color-link);">Jacobin</a>.</p>
+      <sc-if value="{{ showTags }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex; gap:var(--space-2); flex-wrap:wrap; margin:var(--space-5) 0;">
+        <span style="font-family:var(--font-sans); font-size:var(--fs-tiny); font-weight:600; letter-spacing:0.02em; padding:0.3em 0.7em; border-radius:var(--radius-sm); background:var(--racing-050); color:var(--racing-700);">Metaphysics</span>
+        <span style="font-family:var(--font-sans); font-size:var(--fs-tiny); font-weight:600; letter-spacing:0.02em; padding:0.3em 0.7em; border-radius:var(--radius-sm); background:var(--racing-050); color:var(--racing-700);">Philosophy of Language</span>
+        <span style="font-family:var(--font-sans); font-size:var(--fs-tiny); font-weight:600; letter-spacing:0.02em; padding:0.3em 0.7em; border-radius:var(--radius-sm); background:var(--racing-050); color:var(--racing-700);">Social Ontology</span>
+        <span style="font-family:var(--font-sans); font-size:var(--fs-tiny); font-weight:600; letter-spacing:0.02em; padding:0.3em 0.7em; border-radius:var(--radius-sm); border:1px solid var(--racing-300); color:var(--racing-700);">Philosophy of Physics</span>
+      </div>
+      </sc-if>
+      <div style="display:flex; gap:var(--space-3); margin-top:var(--space-5);">
+        <button onClick="{{ goTeaching }}" style="font-family:var(--font-sans); font-size:var(--fs-small); font-weight:600; padding:0.6em 1.1em; cursor:pointer; border-radius:var(--radius-sm); border:1px solid var(--racing-700); background:var(--racing-700); color:var(--text-on-accent);">Teaching</button>
+        <button onClick="{{ goCV }}" style="font-family:var(--font-sans); font-size:var(--fs-small); font-weight:600; padding:0.6em 1.1em; cursor:pointer; border-radius:var(--radius-sm); border:1px solid var(--racing-700); background:transparent; color:var(--racing-700);">Curriculum Vitae</button>
+      </div>
+    </div>
+    </sc-if>
+
+    <!-- TEACHING -->
+    <sc-if value="{{ isTeaching }}" hint-placeholder-val="{{ true }}">
+    <div data-screen-label="Teaching">
+      <div style="margin-top:var(--space-2); margin-bottom:var(--gap-entry);">
+        <h2 style="font-family:var(--font-serif); font-weight:var(--fw-bold); font-size:var(--fs-h2); line-height:var(--lh-tight); color:var(--racing-700); margin:0;">Teaching</h2>
+        <div style="height:var(--rule-weight); background:var(--racing-700); margin-top:4px;"></div>
+      </div>
+      <p style="font-family:var(--font-serif); font-size:var(--fs-body); line-height:var(--lh-loose); color:var(--text-body); margin:var(--space-4) 0 0;">For my current students: office hours are 1:15pm – 2:15pm on Wednesdays, in the RSSS Building, Room 6.40. Students are also welcome to <a href="mailto:danny.wardle@anu.edu.au">email me</a> to arrange a meeting at other times by appointment.</p>
+      <p style="font-family:var(--font-sans); font-size:var(--fs-tiny); font-weight:700; letter-spacing:var(--tracking-label); text-transform:uppercase; color:var(--text-muted); margin:var(--space-5) 0 var(--space-2);">Australian National University · Tutor</p>
+      <ul style="list-style:none; margin:var(--space-2) 0 0; padding:0; display:flex; flex-direction:column; gap:var(--gap-item);">
+        <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:700;">–</span><span style="flex:1;">Topics in Analytic Philosophy: Philosophy of Language (2026)</span></li>
+      </ul>
+      <p style="font-family:var(--font-sans); font-size:var(--fs-tiny); font-weight:700; letter-spacing:var(--tracking-label); text-transform:uppercase; color:var(--text-muted); margin:var(--space-5) 0 var(--space-2);">Australian Catholic University · Tutor</p>
+      <ul style="list-style:none; margin:var(--space-2) 0 0; padding:0; display:flex; flex-direction:column; gap:var(--gap-item);">
+        <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:700;">–</span><span style="flex:1;">Introduction to Ethics (2022)</span></li>
+        <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:700;">–</span><span style="flex:1;">Philosophy: The Big Questions (2022)</span></li>
+        <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:700;">–</span><span style="flex:1;">Theories of Human Nature (2021 &amp; 2023)</span></li>
+      </ul>
+      <p style="font-family:var(--font-sans); font-size:var(--fs-tiny); font-weight:700; letter-spacing:var(--tracking-label); text-transform:uppercase; color:var(--text-muted); margin:var(--space-5) 0 var(--space-2);">University of Adelaide · Tutor</p>
+      <ul style="list-style:none; margin:var(--space-2) 0 0; padding:0; display:flex; flex-direction:column; gap:var(--gap-item);">
+        <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:700;">–</span><span style="flex:1;">Mind and World (2021)</span></li>
+        <li style="display:flex; gap:var(--space-3); align-items:baseline; color:var(--text-body);"><span style="color:var(--racing-700); flex:none; font-weight:700;">–</span><span style="flex:1;">Introduction to Logic (2020)</span></li>
+      </ul>
+    </div>
+    </sc-if>
+
+    <!-- CV -->
+    <sc-if value="{{ isCV }}" hint-placeholder-val="{{ true }}">
+    <div data-screen-label="CV">
+      <div style="margin-top:var(--space-2); margin-bottom:var(--gap-entry);">
+        <h2 style="font-family:var(--font-serif); font-weight:var(--fw-bold); font-size:var(--fs-h2); line-height:var(--lh-tight); color:var(--racing-700); margin:0;">Curriculum Vitae</h2>
+        <div style="height:var(--rule-weight); background:var(--racing-700); margin-top:4px;"></div>
+      </div>
+      <p style="font-family:var(--font-serif); font-size:var(--fs-body); line-height:var(--lh-loose); color:var(--text-body); margin:var(--space-4) 0 0;">A full academic CV — education, presentations, grants, teaching, and service — is available as a typeset PDF, or you can browse the live document version.</p>
+      <div style="display:flex; gap:var(--space-3); margin-top:var(--space-5);">
+        <a href="assets/Danny_Wardle_CV.pdf" download style="text-decoration:none;"><button style="font-family:var(--font-sans); font-size:var(--fs-small); font-weight:600; padding:0.6em 1.1em; cursor:pointer; border-radius:var(--radius-sm); border:1px solid var(--racing-700); background:var(--racing-700); color:var(--text-on-accent);">Download CV (PDF)</button></a>
+        <a href="templates/cv-document/CvDocument.dc.html" style="text-decoration:none;"><button style="font-family:var(--font-sans); font-size:var(--fs-small); font-weight:600; padding:0.6em 1.1em; cursor:pointer; border-radius:var(--radius-sm); border:1px solid var(--racing-700); background:transparent; color:var(--racing-700);">Open document viewer</button></a>
+      </div>
+    </div>
+    </sc-if>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer style="border-top:1px solid var(--border-rule); padding:var(--space-4) var(--space-6); display:flex; gap:var(--space-4); align-items:center; flex-wrap:wrap;">
+    <span style="font-family:var(--font-serif); font-size:var(--fs-small); color:var(--text-muted);">© Danny Wardle</span>
+    <a href="mailto:danny.wardle@anu.edu.au" style="font-family:var(--font-serif); font-size:var(--fs-small); color:var(--color-link);">danny.wardle@anu.edu.au</a>
+    <div style="flex:1;"></div>
+    <a href="https://philpeople.org/profiles/danny-wardle" style="font-family:var(--font-serif); font-size:var(--fs-small); color:var(--text-muted); text-decoration:none;">PhilPeople</a>
+    <a href="https://twitter.com/maximalworm" style="font-family:var(--font-serif); font-size:var(--fs-small); color:var(--text-muted); text-decoration:none;">Twitter</a>
+    <a href="https://www.linkedin.com/in/danny-wardle-7a439616a/" style="font-family:var(--font-serif); font-size:var(--fs-small); color:var(--text-muted); text-decoration:none;">LinkedIn</a>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;initialPage&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Home&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;Home&quot;,&quot;Teaching&quot;,&quot;CV&quot;],&quot;section&quot;:&quot;Behavior&quot;},&quot;showSpecialisationTags&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Behavior&quot;}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { page: props.initialPage || 'Home' };
+    this.navHomeRef = React.createRef();
+    this.navTeachingRef = React.createRef();
+    this.navCVRef = React.createRef();
+  }
+
+  componentDidMount() { this.paintNav(); }
+  componentDidUpdate() { this.paintNav(); }
+
+  paintNav() {
+    const map = {
+      Home: this.navHomeRef, Teaching: this.navTeachingRef, CV: this.navCVRef,
+    };
+    for (const name in map) {
+      const el = map[name].current;
+      if (!el) continue;
+      const active = this.state.page === name;
+      el.style.color = active ? 'var(--racing-700)' : 'var(--text-muted)';
+      el.style.fontWeight = active ? '700' : '400';
+      el.style.borderBottomColor = active ? 'var(--racing-700)' : 'transparent';
+    }
+  }
+
+  renderVals() {
+    const p = this.state.page;
+    const set = (page) => () => this.setState({ page });
+    return {
+      isHome: p === 'Home',
+      isTeaching: p === 'Teaching',
+      isCV: p === 'CV',
+      goHome: set('Home'),
+      goTeaching: set('Teaching'),
+      goCV: set('CV'),
+      navHomeRef: this.navHomeRef,
+      navTeachingRef: this.navTeachingRef,
+      navCVRef: this.navCVRef,
+      showTags: this.props.showSpecialisationTags ?? true,
+    };
+  }
+}
+</script>
+</body>
+</html>

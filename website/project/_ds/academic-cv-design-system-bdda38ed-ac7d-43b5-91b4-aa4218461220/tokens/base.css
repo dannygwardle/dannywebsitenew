@@ -1,0 +1,65 @@
+/* ===========================================================================
+   BASE — light element defaults built on the tokens.
+   Kept minimal: just enough that a bare page reads like the CV document.
+   =========================================================================== */
+
+:root {
+  font-size: 18px;            /* document base; phi scale resolves from here */
+  color: var(--text-ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--text-body);
+  background: var(--surface-page);
+}
+
+/* Links carry the maroon signature. */
+a {
+  color: var(--color-link);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-link) 32%, transparent);
+  transition: color var(--dur-fast) var(--ease-standard),
+              border-color var(--dur-fast) var(--ease-standard);
+}
+a:hover {
+  color: var(--color-link-hover);
+  border-bottom-color: color-mix(in srgb, var(--color-link) 60%, transparent);
+}
+
+/* Headings default to the serif; the name/display role opts into the sans. */
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  color: var(--text-ink);
+  line-height: var(--lh-snug);
+  font-weight: var(--fw-bold);
+  margin: 0;
+}
+
+em, i { font-style: italic; }
+strong, b { font-weight: var(--fw-bold); }
+
+::selection {
+  background: var(--racing-100);
+  color: var(--racing-900);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Utility: the small-caps sans eyebrow used above section bodies. */
+.ds-eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--fs-tiny);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
