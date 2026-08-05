@@ -1,0 +1,415 @@
+/* ===========================================================================
+   Danny Wardle — academic site stylesheet.
+   Design tokens adapted from the Claude Design handoff bundle (website/).
+   =========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
+
+@font-face {
+  font-family: 'Crimson Text';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/CrimsonText-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Crimson Text';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/CrimsonText-Italic.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Crimson Text';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../fonts/CrimsonText-SemiBold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Crimson Text';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../fonts/CrimsonText-SemiBoldItalic.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Crimson Text';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/CrimsonText-Bold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Crimson Text';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/CrimsonText-BoldItalic.ttf') format('truetype');
+}
+
+:root {
+  /* ---- Racing green (primary) ---- */
+  --racing-900: #002115;
+  --racing-800: #00301c;
+  --racing-700: #004225;
+  --racing-600: #0d5733;
+  --racing-500: #2a7150;
+  --racing-300: #7faa92;
+  --racing-200: #b9d2c6;
+  --racing-100: #e2ece7;
+  --racing-050: #f1f6f3;
+
+  /* ---- Link maroon (secondary) ---- */
+  --maroon-700: #42001d;
+  --maroon-500: #6f1334;
+
+  /* ---- Warm neutrals ---- */
+  --ink-900: #1b1a17;
+  --ink-700: #34322c;
+  --ink-muted: #6f6c64;
+  --ink-faint: #9b978d;
+  --rule-warm: #d8d4c9;
+
+  --paper: #ffffff;
+  --paper-warm-2: #f3efe4;
+  --paper-ivory: #fdfcf8;
+
+  --color-link: var(--maroon-700);
+  --color-link-hover: var(--maroon-500);
+  --text-ink: var(--ink-900);
+  --text-body: var(--ink-700);
+  --text-muted: var(--ink-muted);
+  --text-faint: var(--ink-faint);
+  --text-on-accent: #f1f6f3;
+  --border-rule: var(--rule-warm);
+
+  /* ---- Type ---- */
+  --font-serif: 'Crimson Text', 'Minion Pro', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Source Sans 3', 'Myriad Pro', system-ui, -apple-system, sans-serif;
+
+  --fs-name: 2.618rem;
+  --fs-display: 1.618rem;
+  --fs-h2: 1.318rem;
+  --fs-h3: 1.146rem;
+  --fs-body: 1rem;
+  --fs-small: 0.85rem;
+  --fs-tiny: 0.764rem;
+
+  --fw-bold: 700;
+
+  --lh-tight: 1.12;
+  --lh-snug: 1.3;
+  --lh-body: 1.5;
+  --lh-loose: 1.65;
+
+  --tracking-label: 0.14em;
+
+  /* ---- Golden-ratio spacing ---- */
+  --space-1: 0.236rem;
+  --space-2: 0.382rem;
+  --space-3: 0.618rem;
+  --space-4: 1rem;
+  --space-5: 1.618rem;
+  --space-6: 2.618rem;
+  --space-7: 4.236rem;
+  --space-8: 6.854rem;
+
+  --gap-item: var(--space-2);
+  --gap-entry: var(--space-3);
+  --gap-section: var(--space-6);
+
+  --rule-weight: 1.5px;
+  --radius-sm: 2px;
+
+  --shadow-page: 0 1px 2px rgba(27, 26, 23, 0.06), 0 8px 28px rgba(27, 26, 23, 0.09);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: var(--font-serif);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--text-body);
+  background: var(--paper-ivory);
+}
+
+body.page-body { min-height: 100vh; display: flex; flex-direction: column; }
+
+a {
+  color: var(--color-link);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(66, 0, 29, 0.32);
+}
+a:hover { color: var(--color-link-hover); border-bottom-color: rgba(66, 0, 29, 0.6); }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  color: var(--text-ink);
+  line-height: var(--lh-snug);
+  font-weight: var(--fw-bold);
+  margin: 0;
+}
+
+::selection { background: var(--racing-100); color: var(--racing-900); }
+
+*:focus-visible { outline: 2px solid var(--racing-500); outline-offset: 2px; }
+
+/* ===== site header / footer ===== */
+.site-header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-5);
+  padding: var(--space-5) var(--space-6);
+  border-bottom: 1.5px solid var(--racing-700);
+  flex-wrap: wrap;
+}
+.site-title {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--fs-display);
+  letter-spacing: 0.03em;
+  color: var(--racing-700);
+  border-bottom: none;
+}
+.site-subtitle {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+}
+.site-nav { display: flex; gap: var(--space-4); margin-left: auto; }
+.site-nav a {
+  font-family: var(--font-sans);
+  font-size: var(--fs-small);
+  font-weight: 400;
+  color: var(--text-muted);
+  border-bottom: 2px solid transparent;
+  padding: 0 0 2px;
+}
+.site-nav a:hover { color: var(--racing-700); }
+.site-nav a.active { font-weight: 700; color: var(--racing-700); border-bottom-color: var(--racing-700); }
+
+main.page { flex: 1; max-width: 720px; width: 100%; margin: 0 auto; padding: var(--space-7) var(--space-6); }
+
+.site-footer {
+  border-top: 1px solid var(--border-rule);
+  padding: var(--space-4) var(--space-6);
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+  flex-wrap: wrap;
+}
+.site-footer .spacer { flex: 1; }
+.site-footer a, .site-footer span {
+  font-family: var(--font-serif);
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+}
+.site-footer a { border-bottom: none; }
+.site-footer a:hover { color: var(--color-link); }
+
+/* ===== home ===== */
+.hero { display: flex; gap: var(--space-6); align-items: flex-start; flex-wrap: wrap; margin-bottom: var(--space-2); }
+.hero img {
+  width: 168px;
+  height: 168px;
+  object-fit: cover;
+  object-position: top;
+  flex: none;
+  border: 1px solid var(--border-rule);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+}
+.hero-name { font-family: var(--font-sans); font-size: var(--fs-name); color: var(--racing-700); letter-spacing: 0.02em; margin: 0 0 var(--space-2); line-height: 1.05; }
+.hero-role { font-family: var(--font-serif); font-style: italic; color: var(--text-muted); font-size: var(--fs-h3); margin: 0 0 var(--space-3); }
+
+.body-text { font-family: var(--font-serif); font-size: var(--fs-body); line-height: var(--lh-loose); color: var(--text-body); margin: 0 0 var(--space-4); max-width: 38em; }
+
+.tags { display: flex; gap: var(--space-2); flex-wrap: wrap; margin: var(--space-5) 0; }
+.tag {
+  font-family: var(--font-sans);
+  font-size: var(--fs-tiny);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.3em 0.7em;
+  border-radius: var(--radius-sm);
+  background: var(--racing-050);
+  color: var(--racing-700);
+}
+.tag.outline { background: transparent; border: 1px solid var(--racing-300); }
+
+.actions { display: flex; gap: var(--space-3); margin-top: var(--space-5); flex-wrap: wrap; }
+.btn {
+  font-family: var(--font-sans);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  padding: 0.6em 1.1em;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--racing-700);
+  text-decoration: none;
+  display: inline-block;
+  border-bottom: 1px solid var(--racing-700);
+}
+.btn-primary { background: var(--racing-700); color: var(--text-on-accent); }
+.btn-primary:hover { background: var(--racing-600); color: var(--text-on-accent); border-bottom-color: var(--racing-600); }
+.btn-outline { background: transparent; color: var(--racing-700); }
+.btn-outline:hover { background: var(--racing-050); border-bottom-color: var(--racing-700); }
+
+/* ===== shared section heading (Teaching page + CV sections) ===== */
+.section-title { margin-top: var(--gap-section); margin-bottom: var(--gap-entry); }
+.section-title:first-child { margin-top: 0; }
+.section-title h2 { font-family: var(--font-serif); font-weight: var(--fw-bold); font-size: var(--fs-h2); line-height: var(--lh-tight); color: var(--racing-700); }
+.section-title .rule { height: var(--rule-weight); background: var(--racing-700); margin-top: 4px; }
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--fs-tiny);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: var(--space-4) 0 var(--space-1);
+}
+
+.entry-list { list-style: none; margin: var(--space-2) 0 0; padding: 0; display: flex; flex-direction: column; gap: var(--gap-item); }
+.entry-list li { display: flex; gap: var(--space-3); align-items: baseline; color: var(--text-body); }
+.entry-list li .dash { color: var(--racing-700); flex: none; font-weight: var(--fw-bold); }
+.entry-list li span:last-child { flex: 1; }
+
+/* ===== CV document page ===== */
+body.cv-body { background: var(--paper-warm-2); }
+
+.cv-toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: 0 var(--space-5);
+  height: 58px;
+  background: var(--racing-700);
+  color: var(--text-on-accent);
+  border-bottom: 1px solid var(--racing-900);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.cv-toolbar .brand { font-family: var(--font-sans); font-weight: 700; letter-spacing: 0.04em; font-size: var(--fs-small); }
+.cv-toolbar .doctitle { font-family: var(--font-serif); font-style: italic; color: var(--racing-200); font-size: var(--fs-small); }
+.cv-toolbar .spacer { flex: 1; }
+
+.density-toggle { display: flex; align-items: center; gap: 2px; margin-right: var(--space-3); }
+.density-toggle button {
+  font-family: var(--font-sans);
+  font-size: var(--fs-tiny);
+  font-weight: 600;
+  padding: 0.35em 0.7em;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--racing-200);
+}
+.density-toggle button.active { border-color: var(--racing-200); background: rgba(255, 255, 255, 0.14); color: #fff; }
+
+.btn-print {
+  font-family: var(--font-sans);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  padding: 0.45em 0.9em;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--racing-300);
+  background: transparent;
+  color: var(--racing-050);
+}
+.btn-download {
+  font-family: var(--font-sans);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  padding: 0.45em 0.9em;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--paper);
+  background: var(--paper);
+  color: var(--racing-700);
+  text-decoration: none;
+}
+.btn-download:hover { background: var(--racing-050); }
+
+.cv-layout { display: flex; max-width: 980px; margin: 0 auto; }
+
+.cv-rail {
+  flex: none;
+  width: 210px;
+  padding: var(--space-6) var(--space-4);
+  border-right: 1px solid var(--border-rule);
+  position: sticky;
+  top: 58px;
+  align-self: flex-start;
+  max-height: calc(100vh - 58px);
+  overflow: auto;
+}
+.cv-rail .eyebrow { margin: 0 0 var(--space-3); }
+.cv-rail ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.cv-rail a {
+  display: block;
+  text-align: left;
+  border-left: 2px solid transparent;
+  border-bottom: none;
+  padding: 0.3em 0 0.3em 0.7em;
+  font-family: var(--font-serif);
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+}
+.cv-rail a:hover { color: var(--racing-700); border-left-color: var(--racing-300); }
+
+.cv-paper-wrap { flex: 1; padding: var(--space-6) 0 var(--space-8); }
+.cv-paper {
+  background: var(--paper);
+  box-shadow: var(--shadow-page);
+  padding: var(--space-7) calc(var(--space-7) * 1.15);
+  font-family: var(--font-serif);
+  font-size: 18px;
+  line-height: var(--lh-body);
+  color: var(--text-body);
+}
+body.density-compact .cv-paper { padding: var(--space-6) var(--space-7); font-size: 16px; }
+
+.cv-paper [id] { scroll-margin-top: 74px; }
+
+.cv-masthead { text-align: center; }
+.cv-masthead .name { font-family: var(--font-sans); font-weight: 400; font-size: var(--fs-name); letter-spacing: 0.04em; line-height: var(--lh-tight); color: var(--racing-700); }
+.cv-masthead .meta { font-family: var(--font-serif); font-size: var(--fs-small); letter-spacing: 0.03em; color: var(--text-body); margin-top: var(--space-3); }
+.cv-masthead .meta .sep { color: var(--text-faint); margin: 0 0.6em; }
+
+.cv-line { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-4); margin-top: var(--space-3); }
+.cv-line .date { font-weight: var(--fw-bold); color: var(--text-ink); white-space: nowrap; }
+
+.cv-entry { margin-top: var(--gap-entry); }
+.cv-entry .org { color: var(--text-body); }
+.cv-entry .item-title { color: var(--text-ink); }
+
+.cv-role { font-style: italic; color: var(--text-ink); margin-top: var(--space-3); }
+
+@media print {
+  .cv-toolbar, .cv-rail { display: none; }
+  .cv-paper-wrap { padding: 0; }
+  .cv-paper { box-shadow: none; padding: 0; }
+  body { background: #fff; }
+}
+
+@media (max-width: 720px) {
+  .cv-rail { display: none; }
+  .cv-paper { padding: var(--space-6) var(--space-5); }
+}
