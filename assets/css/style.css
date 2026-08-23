@@ -266,7 +266,15 @@ body.cv-body { background: var(--paper-warm-2); }
   top: 0;
   z-index: 10;
 }
-.cv-toolbar .brand { font-family: var(--font-sans); font-weight: 700; letter-spacing: 0.04em; font-size: var(--fs-small); }
+.cv-toolbar .brand {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  font-size: var(--fs-small);
+  color: var(--text-on-accent);
+  border-bottom: none;
+}
+.cv-toolbar .brand:hover { color: var(--racing-200); }
 .cv-toolbar .doctitle { font-family: var(--font-serif); font-style: italic; color: var(--racing-200); font-size: var(--fs-small); }
 .cv-toolbar .spacer { flex: 1; }
 
