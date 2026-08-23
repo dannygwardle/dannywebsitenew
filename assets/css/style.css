@@ -146,6 +146,9 @@ h1, h2, h3, h4 {
   font-size: var(--fs-small);
 }
 .site-nav { display: flex; gap: var(--space-4); margin-left: auto; }
+@media (max-width: 560px) {
+  .site-nav { margin-left: 0; }
+}
 .site-nav a {
   font-family: var(--font-sans);
   font-size: var(--fs-small);
