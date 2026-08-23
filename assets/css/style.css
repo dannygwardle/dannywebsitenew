@@ -3,50 +3,7 @@
    Design tokens adapted from the Claude Design handoff bundle (website/).
    =========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
-
-@font-face {
-  font-family: 'Crimson Text';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('../fonts/CrimsonText-Regular.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Crimson Text';
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url('../fonts/CrimsonText-Italic.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Crimson Text';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url('../fonts/CrimsonText-SemiBold.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Crimson Text';
-  font-style: italic;
-  font-weight: 600;
-  font-display: swap;
-  src: url('../fonts/CrimsonText-SemiBoldItalic.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Crimson Text';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('../fonts/CrimsonText-Bold.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Crimson Text';
-  font-style: italic;
-  font-weight: 700;
-  font-display: swap;
-  src: url('../fonts/CrimsonText-BoldItalic.ttf') format('truetype');
-}
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
 
 :root {
   /* ---- Racing green (primary) ---- */
@@ -85,7 +42,7 @@
   --border-rule: var(--rule-warm);
 
   /* ---- Type ---- */
-  --font-serif: 'Crimson Text', 'Minion Pro', Georgia, 'Times New Roman', serif;
+  --font-serif: 'Crimson Pro', 'Minion Pro', Georgia, 'Times New Roman', serif;
   --font-sans: 'Source Sans 3', 'Myriad Pro', system-ui, -apple-system, sans-serif;
 
   --fs-name: 2.618rem;
