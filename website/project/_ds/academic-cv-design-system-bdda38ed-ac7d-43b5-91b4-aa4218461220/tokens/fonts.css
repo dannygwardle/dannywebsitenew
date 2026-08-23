@@ -1,53 +1,11 @@
 /* ===========================================================================
    FONTS — Academic CV Design System
    ---------------------------------------------------------------------------
-   Body serif:  Crimson Text  (bundled .ttf, SIL OFL) — stands in for the
-                source CV's Minion Pro (proprietary Adobe).
+   Body serif:  Crimson Pro (Google Fonts) — stands in for the source CV's
+                Minion Pro (proprietary Adobe). A wider, more refined
+                superfamily successor to Crimson Text.
    Display sans: Source Sans 3 (Google Fonts) — the open Adobe sibling of
                 Myriad Pro, used for the name + small caps labels.
    =========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
-
-@font-face {
-  font-family: 'Crimson Text';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('../assets/fonts/CrimsonText-Regular.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Crimson Text';
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url('../assets/fonts/CrimsonText-Italic.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Crimson Text';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url('../assets/fonts/CrimsonText-SemiBold.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Crimson Text';
-  font-style: italic;
-  font-weight: 600;
-  font-display: swap;
-  src: url('../assets/fonts/CrimsonText-SemiBoldItalic.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Crimson Text';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('../assets/fonts/CrimsonText-Bold.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Crimson Text';
-  font-style: italic;
-  font-weight: 700;
-  font-display: swap;
-  src: url('../assets/fonts/CrimsonText-BoldItalic.ttf') format('truetype');
-}
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
