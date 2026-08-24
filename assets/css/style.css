@@ -3,6 +3,38 @@
    Design tokens adapted from the Claude Design handoff bundle (website/).
    =========================================================================== */
 
+/* Self-hosted (Latin subset only — covers everything used on this site,
+   including accented characters and typographic punctuation). Each file is
+   a variable font instance, matching what Google Fonts itself serves. */
+@font-face {
+  font-family: 'Crimson Pro';
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: optional;
+  src: url('../fonts/CrimsonPro-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Crimson Pro';
+  font-style: italic;
+  font-weight: 200 900;
+  font-display: optional;
+  src: url('../fonts/CrimsonPro-Italic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: optional;
+  src: url('../fonts/SourceSans3-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: italic;
+  font-weight: 400;
+  font-display: optional;
+  src: url('../fonts/SourceSans3-Italic.woff2') format('woff2');
+}
+
 :root {
   /* ---- Racing green (primary) ---- */
   --racing-900: #002115;
